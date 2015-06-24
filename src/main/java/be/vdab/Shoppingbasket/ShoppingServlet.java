@@ -35,7 +35,8 @@ public class ShoppingServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        makeOrderObject(req);
+        List productList = new ArrayList<>();
+        makeOrderObject(req, productList);
 
         PrintWriter out = resp.getWriter();
         generateDocumentHead(out);
@@ -48,12 +49,12 @@ public class ShoppingServlet extends HttpServlet{
         out.println("</html>");
     }
 
-    private void makeOrderObject(HttpServletRequest req) {
+    private void makeOrderObject(HttpServletRequest req, List productList) {
         session = req.getSession();
         String name = (String) req.getParameter("productName");
         int price = Integer.parseInt(req.getParameter("price"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
-        List productList = new ArrayList<>();
+        //GEEFT MOMENTEEL ENKEL HET LAATSTE ITEM WEER
         productList.add(new Product(name, price, quantity));
         session.setAttribute("order",productList);
     }
