@@ -8,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" url="http://java.sun.com/jsp/jstl/core" %>"
 <html>
 <head>
     <title>Film3</title>
@@ -32,5 +33,21 @@
       }
     %>
   </table>
+
+
+    <h1>Via JSTL</h1>
+    <table>
+        <tr>
+            <th>title</th>
+            <th>year</th>
+        </tr>
+
+        <c:forEach var="filmLijst" items="$(film)">
+            <tr>
+                <td>$(film.getTitle())</td>
+                <td>$(film.getYear())</td>
+            </tr>
+        </c:forEach>
+    </table>
 </body>
 </html>
